@@ -1,0 +1,16 @@
+SPDX-License-Identifier: CC0-1.0
+
+The newly authored source code, layout and documentation in this package
+are provided under CC0 1.0 Universal, to the extent any applicable rights
+subsist in them. You may use, modify and redistribute these components,
+including commercially, without attribution or an additional permission.
+
+CC0 full legal text:
+https://creativecommons.org/publicdomain/zero/1.0/legalcode
+
+This declaration does not apply to third-party fonts and does not assert
+exclusive rights in statutory form fields or ordinary functional layouts.
+Embedded IPAex Mincho font data remains governed by the IPA Font License v1.0.
+Font files are not distributed as standalone files in this package.
+
+No guarantee of acceptance by any municipal registry office is given.

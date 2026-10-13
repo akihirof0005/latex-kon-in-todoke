@@ -1,0 +1,162 @@
+% Compile: lualatex main.tex (UTF-8)
+\documentclass{article}
+\usepackage[paperwidth=420mm,paperheight=297mm,margin=0mm]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{fontspec}
+\usepackage{etoolbox}
+\setmainfont{HaranoAjiMincho-Regular}
+\pagestyle{empty}
+\newcommand{\DataFile}{data.tex}
+% 定義を同梱の別ファイルから読み込みます。
+\input{\DataFile}
+% 左上原点・mm。中央高さで配置。長い入力は欄幅に合わせて縮小。
+\newcommand{\Put}[4]{%
+  \node[anchor=west,inner sep=0pt,outer sep=0pt] at (#1,#2)
+  {\begingroup\fontsize{11}{13}\selectfont
+   \setbox0=\hbox{#4}%
+   \ifdim\wd0>#3mm\resizebox{#3mm}{!}{\box0}\else\box0\fi
+   \endgroup};}
+\newcommand{\Choice}[4]{\ifdefstring{#1}{#2}{\draw[line width=0.55pt,line cap=round,line join=round] (#3,{#4-0.1}) -- ({#3+0.55},{#4+0.6}) -- ({#3+1.75},{#4-1});}{}}
+% 入力欄：指定範囲の中央揃え。任意引数は文字サイズ（pt）。
+\newcommand{\Field}[5][11]{%
+  \node[anchor=center,inner sep=0pt,outer sep=0pt] at ({#2+#4/2},#3)
+  {\begingroup\fontsize{#1}{#1}\selectfont
+   \setbox0=\hbox{#5}%
+   \ifdim\wd0>#4mm\resizebox{#4mm}{!}{\box0}\else\box0\fi
+   \endgroup};}
+% 生年月日は11pt固定。数字の半角空白を除去し、自動縮小しない。
+\ExplSyntaxOn
+\NewDocumentCommand{\DateField}{mmmm}{
+  \group_begin:
+  \tl_set:Nx \l_tmpa_tl {#4}
+  \tl_remove_all:Nn \l_tmpa_tl {~}
+  \node[anchor=center,inner~sep=0pt,outer~sep=0pt] at ({#1+#3/2},#2)
+  {\fontsize{11}{13}\selectfont\tl_use:N \l_tmpa_tl};
+  \group_end:
+}
+\ExplSyntaxOff
+\begin{document}
+\null
+\begin{tikzpicture}[remember picture,overlay,x=1mm,y=-1mm]
+\begin{scope}[shift={(current page.north west)}]
+\node[anchor=north west,inner sep=0pt] at (0,0)
+  {\includegraphics[page=\BackgroundPage,width=420mm,height=297mm]{\BackgroundPDF}};
+\Field[11]{73.25}{55.75}{4.5}{\SubmitYear} % 届出年（令和）
+\Field[11]{84}{55.75}{3}{\SubmitMonth} % 届出月
+\Field[11]{93.25}{55.75}{3}{\SubmitDay} % 届出日
+\Field[11]{64}{62}{31.25}{\Municipality} % 提出先（市区町村名のみ。長は印刷済み）
+\Field[8]{66}{73.5}{28.75}{\HKanaFamily} % 夫：氏のふりがな
+\Field[8]{100.75}{73.5}{28.75}{\HKanaGiven} % 夫：名のふりがな
+\Field[16]{66}{82.25}{28.75}{\HFamily} % 夫：氏
+\Field[16]{100.75}{82.25}{28.75}{\HGiven} % 夫：名
+\DateField{65.5}{89.25}{13}{\HBirthEra} % 夫：生年の元号
+\DateField{81.5}{89.25}{8}{\HBirthYear} % 夫：生年
+\DateField{101.5}{89.25}{5.75}{\HBirthMonth} % 夫：生月
+\DateField{118.25}{89.25}{5.75}{\HBirthDay} % 夫：生日
+\Field[11]{65.25}{95.75}{64.5}{\HAddressOne} % 夫：住所1行目（住民登録どおり）
+\Field[11]{65.25}{102.75}{64.5}{\HAddressTwo} % 夫：住所2行目（番地・建物等）
+\Field[11]{77.25}{110}{50.75}{\HHouseholder} % 夫：世帯主氏名
+\Field[11]{65.25}{117.75}{64.5}{\HHonsekiOne} % 夫：本籍1行目
+\Field[11]{65.5}{125.25}{32}{\HHonsekiNumber} % 夫：本籍の番地・番（数字等のみ）
+\Field[11]{106.75}{125.25}{17}{\HHonsekiBranch} % 夫：本籍の枝番（番地・番の右。例：の2）
+\Field[11]{77.25}{132.5}{50.75}{\HKosekiHead} % 夫：戸籍筆頭者氏名
+\Field[11]{70.25}{140}{46.25}{\HFather} % 夫：父氏名
+\Field[11]{70.25}{146.75}{46.25}{\HMother} % 夫：母氏名
+\Field[11]{70.25}{154}{46.25}{\HAdoptFather} % 夫：養父氏名
+\Field[11]{70.25}{161}{46.25}{\HAdoptMother} % 夫：養母氏名
+\Field[11]{121.75}{145.75}{6.5}{\HRelation} % 夫：父母との続き柄（男・女は印刷済み）
+\Field[11]{121.75}{159.5}{6.5}{\HAdoptRelation} % 夫：養父母との続き柄（養子・養女は印刷済み）
+\Field[11]{83.75}{191.5}{9.75}{\HPreviousEra} % 夫：直前の婚姻解消年の元号
+\Field[11]{98.75}{191.5}{5.75}{\HPreviousYear} % 夫：直前の婚姻解消年
+\Field[11]{111.25}{191.5}{5}{\HPreviousMonth} % 夫：直前の婚姻解消月
+\Field[11]{124.75}{191.5}{5}{\HPreviousDay} % 夫：直前の婚姻解消日
+\Field[11]{79}{228.5}{50}{\HOccupation} % 夫：職業（必要な年のみ記入）
+\Field[8]{135.5}{73.5}{28.75}{\WKanaFamily} % 妻：氏のふりがな
+\Field[8]{170.25}{73.5}{28.75}{\WKanaGiven} % 妻：名のふりがな
+\Field[16]{135.5}{82.25}{28.75}{\WFamily} % 妻：氏
+\Field[16]{170.25}{82.25}{28.75}{\WGiven} % 妻：名
+\DateField{135}{89.25}{13}{\WBirthEra} % 妻：生年の元号
+\DateField{151}{89.25}{8}{\WBirthYear} % 妻：生年
+\DateField{171}{89.25}{5.75}{\WBirthMonth} % 妻：生月
+\DateField{187.75}{89.25}{5.75}{\WBirthDay} % 妻：生日
+\Field[11]{134.75}{95.75}{64.5}{\WAddressOne} % 妻：住所1行目（住民登録どおり）
+\Field[11]{134.75}{102.75}{64.5}{\WAddressTwo} % 妻：住所2行目（番地・建物等）
+\Field[11]{146.75}{110}{50.75}{\WHouseholder} % 妻：世帯主氏名
+\Field[11]{134.75}{117.75}{64.5}{\WHonsekiOne} % 妻：本籍1行目
+\Field[11]{135}{125.25}{32}{\WHonsekiNumber} % 妻：本籍の番地・番（数字等のみ）
+\Field[11]{182.5}{125.25}{17}{\WHonsekiBranch} % 妻：本籍の枝番（番地・番の右。例：の2）
+\Field[11]{146.75}{132.5}{50.75}{\WKosekiHead} % 妻：戸籍筆頭者氏名
+\Field[11]{139.75}{140}{46.25}{\WFather} % 妻：父氏名
+\Field[11]{139.75}{146.75}{46.25}{\WMother} % 妻：母氏名
+\Field[11]{139.75}{154}{46.25}{\WAdoptFather} % 妻：養父氏名
+\Field[11]{139.75}{161}{46.25}{\WAdoptMother} % 妻：養母氏名
+\Field[11]{191.25}{145.75}{6.5}{\WRelation} % 妻：父母との続き柄（男・女は印刷済み）
+\Field[11]{191.25}{159.5}{6.5}{\WAdoptRelation} % 妻：養父母との続き柄（養子・養女は印刷済み）
+\Field[11]{153.25}{191.5}{9.75}{\WPreviousEra} % 妻：直前の婚姻解消年の元号
+\Field[11]{168.25}{191.5}{5.75}{\WPreviousYear} % 妻：直前の婚姻解消年
+\Field[11]{180.75}{191.5}{5}{\WPreviousMonth} % 妻：直前の婚姻解消月
+\Field[11]{194.25}{191.5}{5}{\WPreviousDay} % 妻：直前の婚姻解消日
+\Field[11]{148.5}{228.5}{50}{\WOccupation} % 妻：職業（必要な年のみ記入）
+\Field[11]{64.75}{183.75}{17.25}{\TogetherEra} % 同居開始年の元号
+\Field[11]{82.75}{183.75}{6.5}{\TogetherYear} % 同居開始年
+\Field[11]{95.75}{183.75}{6}{\TogetherMonth} % 同居開始月
+\Field[11]{45}{237.25}{153.5}{\OtherOne} % その他1行目
+\Field[11]{45}{243.75}{153.5}{\OtherTwo} % その他2行目
+\DateField{248.25}{84.25}{15.75}{\SOneBirthEra} % 証人1：生年の元号
+\DateField{274.25}{84.25}{10}{\SOneBirthYear} % 証人1：生年
+\DateField{292.5}{84.25}{6}{\SOneBirthMonth} % 証人1：生月
+\DateField{306.25}{84.25}{5}{\SOneBirthDay} % 証人1：生日
+\Field[11]{248.25}{92.5}{65}{\SOneAddressOne} % 証人1：住所1行目
+\Field[11]{248.25}{101}{65}{\SOneAddressTwo} % 証人1：住所2行目
+\Field[11]{248.25}{110.75}{65}{\SOneHonsekiOne} % 証人1：本籍1行目
+\Field[11]{248.25}{119.75}{46.75}{\SOneHonsekiNumber} % 証人1：本籍の番地・番（数字等のみ）
+\Field[11]{304.25}{119.75}{10.5}{\SOneHonsekiBranch} % 証人1：本籍の枝番（番地・番の右。例：の2）
+\DateField{318.75}{84.25}{15.75}{\STwoBirthEra} % 証人2：生年の元号
+\DateField{344.75}{84.25}{10}{\STwoBirthYear} % 証人2：生年
+\DateField{363}{84.25}{6}{\STwoBirthMonth} % 証人2：生月
+\DateField{376.75}{84.25}{5}{\STwoBirthDay} % 証人2：生日
+\Field[11]{318.75}{92.5}{65}{\STwoAddressOne} % 証人2：住所1行目
+\Field[11]{318.75}{101}{65}{\STwoAddressTwo} % 証人2：住所2行目
+\Field[11]{318.75}{110.75}{65}{\STwoHonsekiOne} % 証人2：本籍1行目
+\Field[11]{318.75}{119.75}{46.75}{\STwoHonsekiNumber} % 証人2：本籍の番地・番（数字等のみ）
+\Field[11]{374.75}{119.75}{10.5}{\STwoHonsekiBranch} % 証人2：本籍の枝番（番地・番の右。例：の2）
+\Field[11]{340.5}{136.75}{43}{\HPhone} % 夫の連絡先電話番号
+\Field[11]{340.5}{148.75}{43}{\WPhone} % 妻の連絡先電話番号
+% 新本籍：元用紙の「番地／番」を残して、選択単位の高さに一行配置。
+\ifdefstring{\NewHonsekiUnit}{番}{\def\NewHonsekiY{176.5}}{\def\NewHonsekiY{173}}
+\Field[11]{80.25}{\NewHonsekiY}{77.75}{\NewHonsekiOne\NewHonsekiNumber}
+\Field[11]{168.5}{\NewHonsekiY}{30}{\NewHonsekiBranch}
+\ifdefstring{\NewHonsekiUnit}{番地}{\draw[line width=0.35pt] (162.5,173) ellipse (3.5mm and 1.8mm);}{}
+\ifdefstring{\NewHonsekiUnit}{番}{\draw[line width=0.35pt] (162.5,176.5) ellipse (3.5mm and 1.8mm);}{}
+\Choice{\HMarriageKind}{first}{65.75}{191.25}
+\Choice{\HMarriageKind}{death}{87}{189.25}
+\Choice{\HMarriageKind}{divorce}{87}{193}
+\Choice{\HHouseholdJob}{1}{70}{197.75}
+\Choice{\HHouseholdJob}{2}{70}{200.75}
+\Choice{\HHouseholdJob}{3}{70}{203.75}
+\Choice{\HHouseholdJob}{4}{70}{210}
+\Choice{\HHouseholdJob}{5}{70}{216}
+\Choice{\HHouseholdJob}{6}{70}{218.75}
+\Choice{\WMarriageKind}{first}{135.25}{191.25}
+\Choice{\WMarriageKind}{death}{156.5}{189.25}
+\Choice{\WMarriageKind}{divorce}{156.5}{193}
+\Choice{\WHouseholdJob}{1}{80}{197.75}
+\Choice{\WHouseholdJob}{2}{80}{200.75}
+\Choice{\WHouseholdJob}{3}{80}{203.75}
+\Choice{\WHouseholdJob}{4}{80}{210}
+\Choice{\WHouseholdJob}{5}{80}{216}
+\Choice{\WHouseholdJob}{6}{80}{218.75}
+\Choice{\ChosenSurname}{husband}{65.5}{169}
+\Choice{\ChosenSurname}{wife}{65.5}{175.25}
+\ifdefstring{\HHonsekiUnit}{番地}{\draw[line width=0.35pt] (101.75,123.5) ellipse (3.5mm and 1.8mm);}{}
+\ifdefstring{\HHonsekiUnit}{番}{\draw[line width=0.35pt] (101.75,127) ellipse (3.5mm and 1.8mm);}{}
+\ifdefstring{\WHonsekiUnit}{番地}{\draw[line width=0.35pt] (177.25,123.5) ellipse (3.5mm and 1.8mm);}{}
+\ifdefstring{\WHonsekiUnit}{番}{\draw[line width=0.35pt] (177.25,127) ellipse (3.5mm and 1.8mm);}{}
+\ifdefstring{\SOneHonsekiUnit}{番地}{\draw[line width=0.35pt] (299.5,117.25) ellipse (3.5mm and 1.8mm);}{}
+\ifdefstring{\SOneHonsekiUnit}{番}{\draw[line width=0.35pt] (299.5,121) ellipse (3.5mm and 1.8mm);}{}
+\ifdefstring{\STwoHonsekiUnit}{番地}{\draw[line width=0.35pt] (370,117.25) ellipse (3.5mm and 1.8mm);}{}
+\ifdefstring{\STwoHonsekiUnit}{番}{\draw[line width=0.35pt] (370,121) ellipse (3.5mm and 1.8mm);}{}
+\end{scope}
+\end{tikzpicture}
+\end{document}

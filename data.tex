@@ -1,0 +1,119 @@
+% UTF-8 / LuaLaTeX
+% 公開用の架空の入力例です。実在の人物・住所・連絡先を示しません。
+% 最後の {} 内を書き換えます。該当しない項目は {} のままにします。
+% 署名は出力しません。印刷後、夫妻および証人本人が自署してください。
+% 特殊文字 & % # _ $ は \& \% \# \_ \$ と書きます。
+
+% 0. 背景PDF（main.texではなく、ここを変更します）
+\newcommand{\BackgroundPDF}{template/simple.pdf} % プロジェクトルートからの相対パス
+\newcommand{\BackgroundPage}{1} % 提出用ページの番号（通常1）
+
+% 1. 届出日・提出先
+\newcommand{\SubmitYear}{9} % 届出年（令和）
+\newcommand{\SubmitMonth}{3} % 届出月
+\newcommand{\SubmitDay}{16} % 届出日
+\newcommand{\Municipality}{架空市} % 提出先（市区町村名のみ。長は印刷済み）
+
+% 2. 夫になる人
+\newcommand{\HKanaFamily}{やまだ} % 夫：氏のふりがな
+\newcommand{\HKanaGiven}{たろう} % 夫：名のふりがな
+\newcommand{\HFamily}{山田} % 夫：氏
+\newcommand{\HGiven}{太郎} % 夫：名
+\newcommand{\HBirthEra}{平成} % 夫：生年の元号
+\newcommand{\HBirthYear}{2} % 夫：生年
+\newcommand{\HBirthMonth}{8} % 夫：生月
+\newcommand{\HBirthDay}{23} % 夫：生日
+\newcommand{\HAddressOne}{東京都架空市みほん町} % 夫：住所1行目（住民登録どおり）
+\newcommand{\HAddressTwo}{1丁目2番3号} % 夫：住所2行目（番地・建物等）
+\newcommand{\HHouseholder}{山田 太郎} % 夫：世帯主氏名
+\newcommand{\HHonsekiOne}{東京都架空市みほん町} % 夫：本籍1行目
+\newcommand{\HHonsekiNumber}{1} % 夫：本籍の番地・番（数字等のみ）
+\newcommand{\HHonsekiUnit}{番地} % 夫：本籍の単位（番地／番）
+\newcommand{\HHonsekiBranch}{の2} % 夫の本籍の枝番
+\newcommand{\HKosekiHead}{山田 一郎} % 夫：戸籍筆頭者氏名
+\newcommand{\HFather}{山田 一郎} % 夫：父氏名
+\newcommand{\HMother}{山田 春子} % 夫：母氏名
+\newcommand{\HAdoptFather}{} % 夫：養父氏名
+\newcommand{\HAdoptMother}{} % 夫：養母氏名
+\newcommand{\HRelation}{長} % 夫：父母との続き柄（男・女は印刷済み）
+\newcommand{\HAdoptRelation}{} % 夫：養父母との続き柄（養子・養女は印刷済み）
+\newcommand{\HMarriageKind}{first} % 夫：初婚・再婚（first/death/divorce/空欄）
+\newcommand{\HPreviousEra}{} % 夫：直前の婚姻解消年の元号
+\newcommand{\HPreviousYear}{} % 夫：直前の婚姻解消年
+\newcommand{\HPreviousMonth}{} % 夫：直前の婚姻解消月
+\newcommand{\HPreviousDay}{} % 夫：直前の婚姻解消日
+\newcommand{\HHouseholdJob}{4} % 夫：同居前の世帯の仕事（1〜6／空欄）
+\newcommand{\HOccupation}{} % 夫：職業（必要な年のみ記入）
+
+% 3. 妻になる人
+\newcommand{\WKanaFamily}{さとう} % 妻：氏のふりがな
+\newcommand{\WKanaGiven}{はなこ} % 妻：名のふりがな
+\newcommand{\WFamily}{佐藤} % 妻：氏
+\newcommand{\WGiven}{花子} % 妻：名
+\newcommand{\WBirthEra}{平成} % 妻：生年の元号
+\newcommand{\WBirthYear}{5} % 妻：生年
+\newcommand{\WBirthMonth}{12} % 妻：生月
+\newcommand{\WBirthDay}{31} % 妻：生日
+\newcommand{\WAddressOne}{東京都架空市みほん町} % 妻：住所1行目（住民登録どおり）
+\newcommand{\WAddressTwo}{2丁目3番4号} % 妻：住所2行目（番地・建物等）
+\newcommand{\WHouseholder}{佐藤 花子} % 妻：世帯主氏名
+\newcommand{\WHonsekiOne}{東京都架空市みほん町} % 妻：本籍1行目
+\newcommand{\WHonsekiNumber}{2} % 妻：本籍の番地・番（数字等のみ）
+\newcommand{\WHonsekiUnit}{番地} % 妻：本籍の単位（番地／番）
+\newcommand{\WHonsekiBranch}{} % 妻の本籍の枝番
+\newcommand{\WKosekiHead}{佐藤 一郎} % 妻：戸籍筆頭者氏名
+\newcommand{\WFather}{佐藤 一郎} % 妻：父氏名
+\newcommand{\WMother}{佐藤 春子} % 妻：母氏名
+\newcommand{\WAdoptFather}{} % 妻：養父氏名
+\newcommand{\WAdoptMother}{} % 妻：養母氏名
+\newcommand{\WRelation}{長} % 妻：父母との続き柄（男・女は印刷済み）
+\newcommand{\WAdoptRelation}{} % 妻：養父母との続き柄（養子・養女は印刷済み）
+\newcommand{\WMarriageKind}{first} % 妻：初婚・再婚（first/death/divorce/空欄）
+\newcommand{\WPreviousEra}{} % 妻：直前の婚姻解消年の元号
+\newcommand{\WPreviousYear}{} % 妻：直前の婚姻解消年
+\newcommand{\WPreviousMonth}{} % 妻：直前の婚姻解消月
+\newcommand{\WPreviousDay}{} % 妻：直前の婚姻解消日
+\newcommand{\WHouseholdJob}{4} % 妻：同居前の世帯の仕事（1〜6／空欄）
+\newcommand{\WOccupation}{} % 妻：職業（必要な年のみ記入）
+
+% 4. 婚姻後の氏・新本籍
+\newcommand{\ChosenSurname}{husband} % 婚姻後の氏（husband/wife/空欄）
+\newcommand{\NewHonsekiOne}{東京都架空市みほん町} % 新本籍1行目（新戸籍を作る場合）
+\newcommand{\NewHonsekiNumber}{1} % 新本籍の番地・番（数字等のみ）
+\newcommand{\NewHonsekiUnit}{番地} % 新本籍の単位（番地／番）
+\newcommand{\NewHonsekiBranch}{の2} % 新本籍の枝番
+
+% 5. 同居開始・その他
+\newcommand{\TogetherEra}{令和} % 同居開始年の元号
+\newcommand{\TogetherYear}{9} % 同居開始年
+\newcommand{\TogetherMonth}{4} % 同居開始月
+\newcommand{\OtherOne}{} % その他1行目
+\newcommand{\OtherTwo}{} % その他2行目
+
+% 6. 証人1
+\newcommand{\SOneBirthEra}{昭和} % 証人1：生年の元号
+\newcommand{\SOneBirthYear}{40} % 証人1：生年
+\newcommand{\SOneBirthMonth}{6} % 証人1：生月
+\newcommand{\SOneBirthDay}{15} % 証人1：生日
+\newcommand{\SOneAddressOne}{東京都架空市みほん町} % 証人1：住所1行目
+\newcommand{\SOneAddressTwo}{3丁目4番5号} % 証人1：住所2行目
+\newcommand{\SOneHonsekiOne}{東京都架空市みほん町} % 証人1：本籍1行目
+\newcommand{\SOneHonsekiNumber}{3} % 証人1：本籍の番地・番（数字等のみ）
+\newcommand{\SOneHonsekiUnit}{番地} % 証人1：本籍の単位（番地／番）
+\newcommand{\SOneHonsekiBranch}{} % 証人1の本籍の枝番
+
+% 7. 証人2
+\newcommand{\STwoBirthEra}{昭和} % 証人2：生年の元号
+\newcommand{\STwoBirthYear}{43} % 証人2：生年
+\newcommand{\STwoBirthMonth}{6} % 証人2：生月
+\newcommand{\STwoBirthDay}{15} % 証人2：生日
+\newcommand{\STwoAddressOne}{東京都架空市みほん町} % 証人2：住所1行目
+\newcommand{\STwoAddressTwo}{4丁目4番5号} % 証人2：住所2行目
+\newcommand{\STwoHonsekiOne}{東京都架空市みほん町} % 証人2：本籍1行目
+\newcommand{\STwoHonsekiNumber}{4} % 証人2：本籍の番地・番（数字等のみ）
+\newcommand{\STwoHonsekiUnit}{番地} % 証人2：本籍の単位（番地／番）
+\newcommand{\STwoHonsekiBranch}{} % 証人2の本籍の枝番
+
+% 8. 連絡先
+\newcommand{\HPhone}{090-0000-0000} % 夫の連絡先電話番号
+\newcommand{\WPhone}{090-0000-0001} % 妻の連絡先電話番号

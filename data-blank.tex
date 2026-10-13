@@ -1,0 +1,119 @@
+% UTF-8 / LuaLaTeX
+% 記入用の空欄データです。
+% 最後の {} 内を書き換えます。該当しない項目は {} のままにします。
+% 署名は出力しません。印刷後、夫妻および証人本人が自署してください。
+% 特殊文字 & % # _ $ は \& \% \# \_ \$ と書きます。
+
+% 0. 背景PDF（main.texではなく、ここを変更します）
+\newcommand{\BackgroundPDF}{template/simple.pdf} % プロジェクトルートからの相対パス
+\newcommand{\BackgroundPage}{1} % 提出用ページの番号（通常1）
+
+% 1. 届出日・提出先
+\newcommand{\SubmitYear}{} % 届出年（令和）
+\newcommand{\SubmitMonth}{} % 届出月
+\newcommand{\SubmitDay}{} % 届出日
+\newcommand{\Municipality}{} % 提出先（市区町村名のみ。長は印刷済み）
+
+% 2. 夫になる人
+\newcommand{\HKanaFamily}{} % 夫：氏のふりがな
+\newcommand{\HKanaGiven}{} % 夫：名のふりがな
+\newcommand{\HFamily}{} % 夫：氏
+\newcommand{\HGiven}{} % 夫：名
+\newcommand{\HBirthEra}{} % 夫：生年の元号
+\newcommand{\HBirthYear}{} % 夫：生年
+\newcommand{\HBirthMonth}{} % 夫：生月
+\newcommand{\HBirthDay}{} % 夫：生日
+\newcommand{\HAddressOne}{} % 夫：住所1行目（住民登録どおり）
+\newcommand{\HAddressTwo}{} % 夫：住所2行目（番地・建物等）
+\newcommand{\HHouseholder}{} % 夫：世帯主氏名
+\newcommand{\HHonsekiOne}{} % 夫：本籍1行目
+\newcommand{\HHonsekiNumber}{} % 夫：本籍の番地・番（数字等のみ）
+\newcommand{\HHonsekiUnit}{} % 夫：本籍の単位（番地／番）
+\newcommand{\HHonsekiBranch}{} % 夫の本籍の枝番
+\newcommand{\HKosekiHead}{} % 夫：戸籍筆頭者氏名
+\newcommand{\HFather}{} % 夫：父氏名
+\newcommand{\HMother}{} % 夫：母氏名
+\newcommand{\HAdoptFather}{} % 夫：養父氏名
+\newcommand{\HAdoptMother}{} % 夫：養母氏名
+\newcommand{\HRelation}{} % 夫：父母との続き柄（男・女は印刷済み）
+\newcommand{\HAdoptRelation}{} % 夫：養父母との続き柄（養子・養女は印刷済み）
+\newcommand{\HMarriageKind}{} % 夫：初婚・再婚（first/death/divorce/空欄）
+\newcommand{\HPreviousEra}{} % 夫：直前の婚姻解消年の元号
+\newcommand{\HPreviousYear}{} % 夫：直前の婚姻解消年
+\newcommand{\HPreviousMonth}{} % 夫：直前の婚姻解消月
+\newcommand{\HPreviousDay}{} % 夫：直前の婚姻解消日
+\newcommand{\HHouseholdJob}{} % 夫：同居前の世帯の仕事（1〜6／空欄）
+\newcommand{\HOccupation}{} % 夫：職業（必要な年のみ記入）
+
+% 3. 妻になる人
+\newcommand{\WKanaFamily}{} % 妻：氏のふりがな
+\newcommand{\WKanaGiven}{} % 妻：名のふりがな
+\newcommand{\WFamily}{} % 妻：氏
+\newcommand{\WGiven}{} % 妻：名
+\newcommand{\WBirthEra}{} % 妻：生年の元号
+\newcommand{\WBirthYear}{} % 妻：生年
+\newcommand{\WBirthMonth}{} % 妻：生月
+\newcommand{\WBirthDay}{} % 妻：生日
+\newcommand{\WAddressOne}{} % 妻：住所1行目（住民登録どおり）
+\newcommand{\WAddressTwo}{} % 妻：住所2行目（番地・建物等）
+\newcommand{\WHouseholder}{} % 妻：世帯主氏名
+\newcommand{\WHonsekiOne}{} % 妻：本籍1行目
+\newcommand{\WHonsekiNumber}{} % 妻：本籍の番地・番（数字等のみ）
+\newcommand{\WHonsekiUnit}{} % 妻：本籍の単位（番地／番）
+\newcommand{\WHonsekiBranch}{} % 妻の本籍の枝番
+\newcommand{\WKosekiHead}{} % 妻：戸籍筆頭者氏名
+\newcommand{\WFather}{} % 妻：父氏名
+\newcommand{\WMother}{} % 妻：母氏名
+\newcommand{\WAdoptFather}{} % 妻：養父氏名
+\newcommand{\WAdoptMother}{} % 妻：養母氏名
+\newcommand{\WRelation}{} % 妻：父母との続き柄（男・女は印刷済み）
+\newcommand{\WAdoptRelation}{} % 妻：養父母との続き柄（養子・養女は印刷済み）
+\newcommand{\WMarriageKind}{} % 妻：初婚・再婚（first/death/divorce/空欄）
+\newcommand{\WPreviousEra}{} % 妻：直前の婚姻解消年の元号
+\newcommand{\WPreviousYear}{} % 妻：直前の婚姻解消年
+\newcommand{\WPreviousMonth}{} % 妻：直前の婚姻解消月
+\newcommand{\WPreviousDay}{} % 妻：直前の婚姻解消日
+\newcommand{\WHouseholdJob}{} % 妻：同居前の世帯の仕事（1〜6／空欄）
+\newcommand{\WOccupation}{} % 妻：職業（必要な年のみ記入）
+
+% 4. 婚姻後の氏・新本籍
+\newcommand{\ChosenSurname}{} % 婚姻後の氏（husband/wife/空欄）
+\newcommand{\NewHonsekiOne}{} % 新本籍1行目（新戸籍を作る場合）
+\newcommand{\NewHonsekiNumber}{} % 新本籍の番地・番（数字等のみ）
+\newcommand{\NewHonsekiUnit}{} % 新本籍の単位（番地／番）
+\newcommand{\NewHonsekiBranch}{} % 新本籍の枝番
+
+% 5. 同居開始・その他
+\newcommand{\TogetherEra}{} % 同居開始年の元号
+\newcommand{\TogetherYear}{} % 同居開始年
+\newcommand{\TogetherMonth}{} % 同居開始月
+\newcommand{\OtherOne}{} % その他1行目
+\newcommand{\OtherTwo}{} % その他2行目
+
+% 6. 証人1
+\newcommand{\SOneBirthEra}{} % 証人1：生年の元号
+\newcommand{\SOneBirthYear}{} % 証人1：生年
+\newcommand{\SOneBirthMonth}{} % 証人1：生月
+\newcommand{\SOneBirthDay}{} % 証人1：生日
+\newcommand{\SOneAddressOne}{} % 証人1：住所1行目
+\newcommand{\SOneAddressTwo}{} % 証人1：住所2行目
+\newcommand{\SOneHonsekiOne}{} % 証人1：本籍1行目
+\newcommand{\SOneHonsekiNumber}{} % 証人1：本籍の番地・番（数字等のみ）
+\newcommand{\SOneHonsekiUnit}{} % 証人1：本籍の単位（番地／番）
+\newcommand{\SOneHonsekiBranch}{} % 証人1の本籍の枝番
+
+% 7. 証人2
+\newcommand{\STwoBirthEra}{} % 証人2：生年の元号
+\newcommand{\STwoBirthYear}{} % 証人2：生年
+\newcommand{\STwoBirthMonth}{} % 証人2：生月
+\newcommand{\STwoBirthDay}{} % 証人2：生日
+\newcommand{\STwoAddressOne}{} % 証人2：住所1行目
+\newcommand{\STwoAddressTwo}{} % 証人2：住所2行目
+\newcommand{\STwoHonsekiOne}{} % 証人2：本籍1行目
+\newcommand{\STwoHonsekiNumber}{} % 証人2：本籍の番地・番（数字等のみ）
+\newcommand{\STwoHonsekiUnit}{} % 証人2：本籍の単位（番地／番）
+\newcommand{\STwoHonsekiBranch}{} % 証人2の本籍の枝番
+
+% 8. 連絡先
+\newcommand{\HPhone}{} % 夫の連絡先電話番号
+\newcommand{\WPhone}{} % 妻の連絡先電話番号
